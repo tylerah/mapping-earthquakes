@@ -38,6 +38,13 @@ let torontoHoods= "https://raw.githubusercontent.com/tylerah/mapping-earthquakes
 d3.json(torontoHoods).then(function(data) {
   console.log(data);
 // Creating a GeoJSON layer with the retrieved data.
-L.geoJSON(data).addTo(map);
+L.geoJSON(data, {
+  color: "blue",
+  weight: 1,
+  fillColor: "yellow",
+  onEachFeature: function(feature, layer) {
+    layer.bindPopup("<h3> Neighborhood: " + feature.properties.AREA_NAME + "</h3>");
+  }
+})
+.addTo(map);
 });
-
